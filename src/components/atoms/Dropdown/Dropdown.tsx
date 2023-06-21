@@ -26,19 +26,19 @@ export const Dropdown = ({
       <Text>{item}</Text>
       {visible && (
         <ContainerList>
-          {data.map((item, index) => {
+          {data.map((obj, index) => {
             let lastItem = index === data.length - 1;
             return (
               <ContainerItemDropdownList
-                key={`${item.label}-${index}`}
+                key={`${obj.label}-${index}`}
                 lastItem={lastItem}>
                 <Text
                   onPress={() => {
-                    setItem(item.label);
+                    setItem(obj.label);
                     setVisible(false);
                     setValue(item);
                   }}>
-                  {item.label}
+                  {obj.label}
                 </Text>
               </ContainerItemDropdownList>
             );

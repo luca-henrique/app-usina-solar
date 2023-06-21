@@ -9,7 +9,7 @@ const data = [
   {label: 'Ano', value: 'yearly'},
 ];
 
-export const SelectGroup = () => {
+export const Header = () => {
   return (
     <View
       style={{

@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 
 import {ScrollView, View} from 'react-native';
 import api from './src/service';
-import {SelectGroup} from './src/components';
+import {Header} from './src/components';
 
 import {BarChart, LineChart, PieChart} from 'react-native-gifted-charts';
 
@@ -63,7 +63,7 @@ function App(): JSX.Element {
         paddingHorizontal: 20,
       }}>
       <View style={{marginTop: 20}} />
-      <SelectGroup />
+      <Header />
     </ScrollView>
   );
 }

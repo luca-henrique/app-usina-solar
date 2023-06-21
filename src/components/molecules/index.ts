@@ -1,2 +1,2 @@
 export * from './Filters/Filters';
-export * from './SelectGroup/SelectGroup';
+export * from './Header/Header';
