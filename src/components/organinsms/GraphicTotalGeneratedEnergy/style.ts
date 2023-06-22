@@ -20,5 +20,5 @@ export const Text = styled.Text`
 
 export const Main = styled.View`
   padding: 20px;
-  alignitems: center;
+  align-items: center;
 `;
