@@ -6,8 +6,16 @@ import {GraphicTotalGeneratedEnergyCenterLabel} from '../../molecules/GraphicTot
 
 import {Container, GraphicContainer, Text, Main} from './style';
 
-export const GraphicTotalGeneratedEnergy = () => {
-  let valorGasto = (72.0 / 113.325) * 100;
+type GraphicTotalGeneratedEnergyProps = {
+  amountSpent: any;
+  amountRemaining: number;
+};
+
+export const GraphicTotalGeneratedEnergy = ({
+  amountSpent = 10,
+  amountRemaining = 10,
+}: GraphicTotalGeneratedEnergyProps) => {
+  let valorGasto = (amountSpent / amountRemaining) * 100;
   let valorRestante = 100 - valorGasto;
 
   const pieData = [
@@ -37,7 +45,7 @@ export const GraphicTotalGeneratedEnergy = () => {
             centerLabelComponent={() => {
               return (
                 <GraphicTotalGeneratedEnergyCenterLabel
-                  amountSpent={valorGasto.toFixed()}
+                  amountSpent={amountSpent}
                 />
               );
             }}

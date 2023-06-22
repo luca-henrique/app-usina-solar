@@ -3,7 +3,7 @@ import React from 'react';
 import {Container, Text} from './style';
 
 type GraphicTotalGeneratedEnergyCenterLabelProps = {
-  amountSpent: string;
+  amountSpent: number;
 };
 
 export const GraphicTotalGeneratedEnergyCenterLabel = ({
@@ -11,7 +11,7 @@ export const GraphicTotalGeneratedEnergyCenterLabel = ({
 }: GraphicTotalGeneratedEnergyCenterLabelProps) => {
   return (
     <Container>
-      <Text>{amountSpent}%</Text>
+      <Text>{amountSpent}</Text>
       <Text>KWh</Text>
     </Container>
   );

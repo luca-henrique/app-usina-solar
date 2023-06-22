@@ -1,18 +1,20 @@
 import React, {useCallback, useEffect, useState} from 'react';
 
-import {ScrollView, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import api from './src/service';
 import {
   Header,
   DetailInformation,
   GraphicTotalGeneratedEnergy,
+  GraphicEnergyGenerate,
 } from './src/components';
-import {BarChart} from 'react-native-gifted-charts';
 
 import styled from 'styled-components/native';
+import {getDay, getMonthByDate} from './src/utils';
 
 export const Container = styled.ScrollView`
   flex: 1;
+  z-index: -1;
 `;
 
 interface ITotal {
@@ -33,12 +35,15 @@ interface IDetails {
   totals: ITotal;
   graphicData: IDataGraphic;
   totalEnergyGenereted: number;
+  expected: number;
 }
+
+type DataType = 'hourly' | 'daily' | 'monthly' | 'yearly';
 
 function App(): JSX.Element {
   const [data, setData] = useState<IDataGraphic[]>([]);
   const [loading, setLoading] = useState(true);
-  const [total, setTotal] = useState<string>('');
+  const [total, setTotal] = useState<number>(0);
   const [totals, setTotals] = useState<ITotal>({
     co2: 0,
     kwh: 0,
@@ -46,9 +51,13 @@ function App(): JSX.Element {
     trees: 0,
   });
 
+  const [expected, setExpected] = useState(0);
+
   const {information, setInformation} = useState<IDetails>();
 
-  const getData = useCallback(async (dataType: string = 'hourly') => {
+  const [type, setType] = useState<DataType>('hourly');
+
+  const getData = useCallback(async (dataType: DataType = 'hourly') => {
     setLoading(true);
     try {
       const {data} = await api.get('', {
@@ -57,8 +66,19 @@ function App(): JSX.Element {
         },
       });
 
-      const {generation, totals, x_labels} = data.data;
-      console.log(data.data);
+      const {generation, totals, x_labels, expected} = data.data;
+      setExpected(expected[0]);
+
+      const formatLabels: Record<DataType, (label: string) => string> = {
+        hourly: label => label.split(':').join(':'),
+        daily: getDay,
+        monthly: getMonthByDate,
+        yearly: label => label.split('-')[0],
+      };
+
+      function formatLabel(dataType: DataType, label: string): string {
+        return formatLabels[dataType](label);
+      }
 
       let generationTotal = 0;
 
@@ -69,25 +89,23 @@ function App(): JSX.Element {
       let dataGraphics = [];
 
       for (let index = 0; index < generation.length; index++) {
-        //console.log(x_labels[index].split(':'));
-        //console.log(dataType);
-
-        let hours = x_labels[index].split(':');
+        const formattedLabel = formatLabel(dataType, x_labels[index]);
 
         dataGraphics.push({
           value: generation[index],
-          label: `${hours[0]}:${hours[1]}`,
+          label: formattedLabel,
           frontColor: '#177AD5',
+          // eslint-disable-next-line react/no-unstable-nested-components
           topLabelComponent: () => (
             <Text style={{fontSize: 12, marginBottom: 6}}>
-              {generation[index]}
+              {generation[index].toFixed()}
             </Text>
           ),
         });
       }
 
       setData(dataGraphics);
-      setTotal(generationTotal.toFixed(2));
+      setTotal(generationTotal);
       setTotals(totals);
       setLoading(false);
     } catch (error) {
@@ -96,58 +114,36 @@ function App(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    getData();
-  }, [getData]);
+    getData(type);
+  }, [getData, type]);
 
   return (
     <Container>
-      <Header />
+      <Header setType={setType} />
       {loading ? (
         <></>
       ) : (
-        <View>
+        <View style={{zIndex: -2}}>
           <DetailInformation
             icon="energy-icon"
             description="Total de energia gerada"
-            result={`${total} KWh`}>
-            <GraphicTotalGeneratedEnergy />
+            result={`${total.toFixed()} KW/h`}>
+            <GraphicEnergyGenerate data={data} />
           </DetailInformation>
           <DetailInformation
             icon="co2-icon"
             description="Quantidade de carbono evitado"
-            result={`${totals.co2}g`}
+            result={`${totals.co2.toFixed()}g`}
           />
           <DetailInformation
             icon="tree-icon"
             description="Quantidade de árvores salvas"
-            result={`${totals.trees} unidades`}
+            result={`${totals.trees.toFixed()} unidades`}
           />
         </View>
       )}
     </Container>
   );
 }
-
-export const GraphicEnergyGenerate = ({data}: any) => {
-  return (
-    <View
-      style={{
-        paddingHorizontal: 20,
-        marginBottom: 20,
-      }}>
-      <BarChart
-        barWidth={32}
-        noOfSections={3}
-        barBorderRadius={4}
-        frontColor="lightgray"
-        data={data}
-        yAxisThickness={0}
-        xAxisThickness={0}
-        xAxisLabelTextStyle={{color: '#6c757d'}}
-        yAxisTextStyle={{color: '#6c757d'}}
-      />
-    </View>
-  );
-};
 
 export default App;

@@ -4,6 +4,6 @@ import {GraphicTotalGeneratedEnergy} from './GraphicTotalGeneratedEnergy';
 
 describe('App', () => {
   it('renders correctly', () => {
-    render(<GraphicTotalGeneratedEnergy />);
+    render(<GraphicTotalGeneratedEnergy amountSpent={0} amountRemaining={0} />);
   });
 });

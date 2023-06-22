@@ -6,6 +6,8 @@ import {
   ContainerList,
   ContainerItemDropdownList,
 } from './style';
+import {Image} from 'react-native';
+import {Images} from '../../../assets/icons';
 
 type DropdownProps = {
   data?: any[];
@@ -23,7 +25,10 @@ export const Dropdown = ({
 
   return (
     <ContainerDropdown onPress={() => setVisible(!visible)} visible={visible}>
-      <Text>{item}</Text>
+      <>
+        <Text>{item}</Text>
+        <Image source={Images['arrow-down-icon']} />
+      </>
       {visible && (
         <ContainerList>
           {data.map((obj, index) => {
@@ -36,7 +41,7 @@ export const Dropdown = ({
                   onPress={() => {
                     setItem(obj.label);
                     setVisible(false);
-                    setValue(item);
+                    setValue(obj.value);
                   }}>
                   {obj.label}
                 </Text>

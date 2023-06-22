@@ -16,6 +16,7 @@ export const ContainerDropdown = styled.TouchableOpacity<{visible?: boolean}>`
   border-top-start-radius: 6px;
   border-bottom-end-radius: ${props => (!props.visible ? 6 : 0)}px;
   border-bottom-start-radius: ${props => (!props.visible ? 6 : 0)}px;
+  z-index: 999;
 `;
 
 export const ContainerList = styled.View`
@@ -24,6 +25,7 @@ export const ContainerList = styled.View`
   position: absolute;
   top: 34px;
   left: -1px;
+  z-index: 999;
 `;
 
 export const ContainerItemDropdownList = styled.View<{lastItem: boolean}>`
@@ -34,14 +36,17 @@ export const ContainerItemDropdownList = styled.View<{lastItem: boolean}>`
   flex-direction: row;
   border-width: 1.5px;
   border-color: #e9ecef;
-  backgroundcolor: #f8f9fa;
+  background-color: #f8f9fa;
   alignitems: center;
   justifycontent: center;
   border-bottom-end-radius: ${props => (props.lastItem ? 6 : 0)}px;
   border-bottom-start-radius: ${props => (props.lastItem ? 6 : 0)}px;
+  z-index: 999;
+  justify-content: center;
 `;
 
 export const Text = styled.Text`
   font-size: 14;
   color: #6c757d;
+  margin-right: 6px;
 `;
