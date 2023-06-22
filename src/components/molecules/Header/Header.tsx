@@ -1,26 +1,14 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {Dropdown} from '../../atoms/Dropdown/Dropdown';
-
-const data = [
-  {label: 'Hora', value: 'hourly'},
-  {label: 'Dia', value: 'daily'},
-  {label: 'Mês', value: 'monthly'},
-  {label: 'Ano', value: 'yearly'},
-];
+import {Container} from './style';
+import {selectOptions} from '../../../common';
 
 export const Header = () => {
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
+    <Container>
       <Text>Resumo</Text>
-
-      <Dropdown data={data} setValue={item => console.log(item)} />
-    </View>
+      <Dropdown data={selectOptions} setValue={item => console.log(item)} />
+    </Container>
   );
 };
