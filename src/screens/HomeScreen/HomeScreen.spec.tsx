@@ -1,9 +1,9 @@
 import React from 'react';
 import {render} from 'react-native-testing-library';
-import {Header} from './Header';
+import {HomeScreen} from './HomeScreen';
 
 describe('App', () => {
   it('renders correctly', () => {
-    render(<Header />);
+    render(<HomeScreen />);
   });
 });
