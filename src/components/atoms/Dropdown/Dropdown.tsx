@@ -24,7 +24,10 @@ export const Dropdown = ({
   const [item, setItem] = useState(value);
 
   return (
-    <ContainerDropdown onPress={() => setVisible(!visible)} visible={visible}>
+    <ContainerDropdown
+      onPress={() => setVisible(!visible)}
+      visible={visible}
+      testID="container-dropdown-list">
       <>
         <Text>{item}</Text>
         <Image source={Images['arrow-down-icon']} />

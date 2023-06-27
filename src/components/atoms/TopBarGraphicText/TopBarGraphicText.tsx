@@ -1,5 +1,6 @@
-import {Text} from 'react-native';
+import React from 'react';
+import {Text} from './style';
 
 export const TopBarGraphicText = ({children}: any) => {
-  return <Text style={{fontSize: 12, marginBottom: 6}}>{children}</Text>;
+  return <Text>{children}</Text>;
 };

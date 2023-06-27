@@ -1,8 +1,8 @@
 ## Taks
 
 [] - A minha usina está gerando hoje?
-[] - Como foi a minha geração em função do tempo, cronologicamente?
-[] - Dado um filtro temporal
+[x] - Como foi a minha geração em função do tempo, cronologicamente?
+[x] - Dado um filtro temporal
 
 [x] - Qual o total de energia gerada?
 [x] - Qual a quantidade de carbono evitado?
