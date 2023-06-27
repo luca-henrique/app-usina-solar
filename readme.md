@@ -47,7 +47,7 @@ Conteúdo do documento.
 
 ## Vídeo
 
-::: tabs
-::: tab "Vídeo 1"
-[Assista ao Vídeo 1](<./Simulator%20Screen%20Recording%20-%20iPhone%20SE%20(3rd%20generation)%20-%202023-06-26%20at%2023.21.24.mp4>)
-:::
+<video width="640" height="360" controls>
+  <source src="./Simulator%20Screen%20Recording%20-%20iPhone%20SE%20(3rd%20generation)%20-%202023-06-26%20at%2023.21.24.mp4" type="video/mp4">
+  Seu navegador não suporta a reprodução de vídeo.
+</video>
