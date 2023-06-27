@@ -47,4 +47,7 @@ Conteúdo do documento.
 
 ## Vídeo
 
-Você pode assistir a um vídeo de demonstração do aplicativo em ios [aqui](<./Simulator%20Screen%20Recording%20-%20iPhone%20SE%20(3rd%20generation)%20-%202023-06-26%20at%2023.21.24.mp4>).
+::: tabs
+::: tab "Vídeo 1"
+[Assista ao Vídeo 1](<./Simulator%20Screen%20Recording%20-%20iPhone%20SE%20(3rd%20generation)%20-%202023-06-26%20at%2023.21.24.mp4>)
+:::
